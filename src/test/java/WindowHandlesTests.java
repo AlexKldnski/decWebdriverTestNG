@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -34,12 +36,15 @@ public class WindowHandlesTests {
     //TODO: refactor it
     @Test
     public void test001() throws InterruptedException {
-        openMainPage();
+        openMainPage("https://the-internet.herokuapp.com/windows");
 
         clickLink();
 
         //TODO: change to explicit wait
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
+        //waitForNewWindowAndSwitchToIt(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         //TODO: Collections, HashSets, LinkedLists
         //http://cs.stmarys.ca/~porter/csc/341/notes/JavaCollections.html
@@ -62,7 +67,7 @@ public class WindowHandlesTests {
 
         String expectedWindowTitle2 = "New Window";
 
-        Assert.assertEquals(driver.getTitle(), expectedWindowTitle2);
+        Assert.assertEquals(windowTitle2, expectedWindowTitle2);
 
         driver.switchTo().window(handle1);
 
@@ -75,7 +80,8 @@ public class WindowHandlesTests {
         driver.findElement(By.partialLinkText("Click Here")).click();
     }
 
-    private void openMainPage() {
-        driver.get("https://the-internet.herokuapp.com/windows");
+    private void openMainPage(String link) {
+        driver.get(link);
+        driver.manage().window().maximize();
     }
 }
