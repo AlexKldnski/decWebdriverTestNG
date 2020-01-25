@@ -33,12 +33,11 @@ public class WindowHandlesTests {
 
     }
 
-    //TODO: refactor it
     @Test
     public void test001() throws InterruptedException {
         openMainPage("https://the-internet.herokuapp.com/windows");
 
-        clickLink();
+        clickLink("Click Here");
 
         //TODO: change to explicit wait
         //Thread.sleep(5000);
@@ -48,36 +47,38 @@ public class WindowHandlesTests {
 
         //TODO: Collections, HashSets, LinkedLists
         //http://cs.stmarys.ca/~porter/csc/341/notes/JavaCollections.html
+
         Set<String> windowHandles = driver.getWindowHandles();
 
-        int size = windowHandles.size();
+        assertNumberOfWindows(windowHandles, 2);
 
-        int expectedNumberOfWindows = 2;
+        String[] winNamesArray = {"The Internet", "New Window"};
 
-        Assert.assertEquals(size, expectedNumberOfWindows, "Amount of windows is not " + expectedNumberOfWindows);
+        verifyWindowNames(windowHandles, winNamesArray);
+
+    }
+
+    private void verifyWindowNames(Set<String> windowHandles, String[] winNamesArray) {
 
         Object[] arrayOfHandles = windowHandles.toArray();
 
-        String handle1 = (String) arrayOfHandles[0];
-        String handle2 = (String) arrayOfHandles[1];
+        Assert.assertEquals(windowHandles.size(), winNamesArray.length, "Amount of windows is not equal to amount of window names");
 
-        driver.switchTo().window(handle2);
+        for (int i=0; i<windowHandles.size(); i++ ){
+            driver.switchTo().window((String) arrayOfHandles[i]);
+            Assert.assertEquals(driver.getTitle(), winNamesArray[i], "Window name doesn't match expected: " + winNamesArray[i]);
+        }
 
-        String windowTitle2 = driver.getTitle();
-
-        String expectedWindowTitle2 = "New Window";
-
-        Assert.assertEquals(windowTitle2, expectedWindowTitle2);
-
-        driver.switchTo().window(handle1);
-
-        String expectedWindowTitle1 = "The Internet";
-
-        Assert.assertEquals(driver.getTitle(), expectedWindowTitle1);
     }
 
-    private void clickLink() {
-        driver.findElement(By.partialLinkText("Click Here")).click();
+    private void assertNumberOfWindows(Set<String> windowHandles, int expectedNumberOfWindows) {
+
+        int size = windowHandles.size();
+        Assert.assertEquals(size, expectedNumberOfWindows, "Amount of windows is not " + expectedNumberOfWindows);
+    }
+
+    private void clickLink(String linkText) {
+        driver.findElement(By.partialLinkText(linkText)).click();
     }
 
     private void openMainPage(String link) {
