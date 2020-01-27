@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+
+    <test name="GoogleSearchUITests1" >
+    <parameter name="queryTextParameter"  value="Portnov Computer School"/>
+    <classes>
+        <class name="GoogleSearchTest">
+            <methods>
+                <include name="test0001"/>
+            </methods>
+        </class>
+
+    </classes>
+    </test>
+
+    <test name="GoogleSearchUITests2" >
+        <parameter name="queryTextParameter"  value="Portnov"/>
+        <classes>
+            <class name="GoogleSearchTest">
+                <methods>
+                    <include name="test0001"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

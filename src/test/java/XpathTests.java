@@ -44,6 +44,7 @@ public class XpathTests {
         String xpath11= "//*[@type='password']//preceding::input[@name='username']";
 
         driver.get("https://the-internet.herokuapp.com/login");
-        driver.findElements(By.xpath(xpath0));
+        WebElement element = driver.findElement(By.xpath(xpath0));
+        element.sendKeys("123");
     }
 }
