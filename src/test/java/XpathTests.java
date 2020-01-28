@@ -1,9 +1,11 @@
+import com.beust.jcommander.Parameter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -21,8 +23,9 @@ public class XpathTests {
         driver.quit();
     }
 
+    @Parameters({ "xpathparameter" })
     @Test
-    public void test001() {
+    public void test001(String parameter) {
         driver = new FirefoxDriver();
 
         String absXPath = "/html/body/div[1]/div[2]/div[2]/div[1]/form/div[1]/div/div[1]/div/div/input[1]";
@@ -44,7 +47,7 @@ public class XpathTests {
         String xpath11= "//*[@type='password']//preceding::input[@name='username']";
 
         driver.get("https://the-internet.herokuapp.com/login");
-        WebElement element = driver.findElement(By.xpath(xpath0));
+        WebElement element = driver.findElement(By.xpath(parameter));
         element.sendKeys("123");
     }
 }

@@ -12,9 +12,10 @@ public class GoogleSearchTest {
 
     WebDriver driver;
 
+    @Parameters({ "setupBrowserType", "setupBrowserPath" })
     @BeforeClass
-    public void setup(){
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\AlexK\\IdeaProjects\\decWebdriverTestNG\\src\\test\\resources\\geckodriver.exe");
+    public void setup(String browserType, String browserPath){
+        System.setProperty(browserType, browserPath);
     }
 
     @AfterClass

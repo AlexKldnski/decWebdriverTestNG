@@ -7,6 +7,9 @@
     <classes>
         <class name="GoogleSearchTest">
             <methods>
+                <parameter name="setupBrowserType" value="webdriver.gecko.driver"/>
+                <parameter name="setupBrowserPath" value="C:\Users\AlexK\IdeaProjects\decWebdriverTestNG\src\test\resources\geckodriver.exe"></parameter>
+                <include name="setup"/>
                 <include name="test0001"/>
             </methods>
         </class>
@@ -19,11 +22,26 @@
         <classes>
             <class name="GoogleSearchTest">
                 <methods>
+                    <parameter name="setupBrowserType" value="webdriver.gecko.driver"/>
+                    <parameter name="setupBrowserPath" value="C:\Users\AlexK\IdeaProjects\decWebdriverTestNG\src\test\resources\geckodriver.exe"></parameter>
+                    <include name="setup"/>
                     <include name="test0001"/>
                 </methods>
             </class>
 
         </classes>
     </test>
+
+    <test name="XPathTests">
+        <parameter name="xpathparameter" value="//*[@id='username']"></parameter>
+        <classes>
+            <class name="XpathTests">
+                <methods>
+                   <include name="test001"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 
 </suite>
