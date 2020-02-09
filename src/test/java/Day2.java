@@ -1,13 +1,13 @@
+import com.sun.javaws.progress.PreloaderPostEventListener;
 import org.testng.ConversionUtils;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.awt.image.ImageProducer;
+import java.util.*;
 
 public class Day2 {
     @Test
-    public void testNameswapTwoNumbersInArray() {
+    public void swapTwoNumbersInArray() {
         int[] array = {1, 2, 3, 4};
         swap(array, 1,2);
         System.out.println(Arrays.toString(array));
@@ -37,6 +37,30 @@ public class Day2 {
         System.out.println(result);
     }
 
+    @Test
+    public void testCountAllLetters() {
+        String input = "hello world";
+        System.out.println(input);
+        char[] arrayOfChars = input.toCharArray();
+        ArrayList<Character> sortedArrayOfChars = new ArrayList<Character>();
+        for (int i=0; i<arrayOfChars.length; i++){
+            if (sortedArrayOfChars.contains(arrayOfChars[i])) continue;
+            else sortedArrayOfChars.add(arrayOfChars[i]);
+        }
+
+        System.out.println(sortedArrayOfChars.toString());
+
+        HashMap<Character, Integer> mapOfLetters = new HashMap<Character, Integer>();
+
+        for (char each : sortedArrayOfChars) {
+            int count = 0;
+            for (int i=0; i<arrayOfChars.length; i++) {
+            if(each==arrayOfChars[i]) count++;
+            mapOfLetters.put(each, count);
+            }
+        }
+        System.out.println(mapOfLetters);
+    }
 
     @Test
     public void testConstructorTest() {
